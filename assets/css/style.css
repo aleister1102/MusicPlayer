@@ -198,6 +198,16 @@ body {
 
 @media only screen and (max-width: 420px) {
     .wrapper{
-        width: 420px;
+        width: 400px;
+    }
+    .cd{
+        width: 180px;
     }
 }
+
+@media only screen and (max-width: 380px) {
+    .wrapper{
+        width: 360px;
+    }
+}
+

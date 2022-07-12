@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Music player</title>
+        <!-- Icons -->
+        <script
+            src="https://kit.fontawesome.com/f31e1a0778.js"
+            crossorigin="anonymous"
+        ></script>
+        <!-- Fonts -->
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+            rel="stylesheet"
+        />
+        <!-- Styles -->
+        <link rel="stylesheet" href="./assets/css/style.css" />
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <!-- Player -->
+            <div class="player">
+                <!-- Header -->
+                <div class="header">
+                    <h4>Now playing:</h4>
+                    <h2>Song's name</h2>
+                </div>
+
+                <!-- CD -->
+                <div class="cd">
+                    <div class="cd-image"></div>
+                </div>
+
+                <!-- Control -->
+                <div class="control">
+                    <div class="btn btn-repeat">
+                        <i class="fa-solid fa-arrow-rotate-right"></i>
+                    </div>
+                    <div class="btn btn-prev">
+                        <i class="fa-solid fa-backward-step"></i>
+                    </div>
+                    <div class="btn btn-center">
+                        <!-- <i class="fas fa-play"></i> -->
+                        <i class="fas fa-pause"></i>
+                    </div>
+                    <div class="btn btn-next">
+                        <i class="fa-solid fa-forward-step"></i>
+                    </div>
+                    <div class="btn bth-shuffle">
+                        <i class="fas fa-shuffle"></i>
+                    </div>
+                </div>
+
+                <!-- Progress -->
+                <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    placeholder="progress"
+                    class="progress"
+                />
+            </div>
+
+            <!-- Playlist -->
+            <div class="playlist">
+                <div class="song">
+                    <div class="song-img"></div>
+                    <div class="song-info">
+                        <h3>Song's name</h3>
+                        <p>Artist's name</p>
+                    </div>
+                    <div class="song-option"></div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

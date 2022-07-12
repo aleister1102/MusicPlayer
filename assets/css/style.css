@@ -51,23 +51,19 @@ body {
 }
 
 .cd {
-    width: 100%;
+    width: 252px;
     margin: auto;
     display: flex;
-    --cd-size: 252px;
     align-items: center;
-    height: var(--cd-size);
     justify-content: center;
 }
 .cd-image {
-    margin: auto;
     border-radius: 50%;
-    width: var(--cd-size);
-    height: var(--cd-size);
-    background-size: contain;
-    animation: spin 6s infinite linear;
-    background-image: url('../img/cd.jpg');
-    box-shadow: 0px 0px 4px 2px rgba(245, 188, 211, 1);
+    padding-top: 100%;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    /* animation: spin 1s linear infinite; */
 }
 
 .control {
@@ -87,6 +83,9 @@ body {
     cursor: pointer;
     transform: scale(1.2);
 }
+.btn--actived {
+    color: var(--primary-color);
+}
 .btn-center {
     color: #fff;
     padding: 4px;
@@ -101,6 +100,18 @@ body {
     background-color: var(--primary-color);
     box-shadow: 0px 4px 10px 1px rgb(236, 31, 85, 0.8);
 }
+.btn-center.playing .play-icon {
+    display: none;
+}
+.btn-center.playing .pause-icon {
+    display: block;
+}
+.btn-center .play-icon {
+    display: block;
+}
+.btn-center .pause-icon {
+    display: none;
+}
 
 .progress {
     width: 100%;
@@ -112,8 +123,8 @@ body {
     transition: opacity 0.2s;
 }
 .progress::-webkit-slider-thumb {
-    width: 16px;
-    height: 12px;
+    width: 18px;
+    height: 16px;
     cursor: pointer;
     -webkit-appearance: none;
     appearance: none;
@@ -169,10 +180,7 @@ body {
 }
 
 @keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
+    to {
         transform: rotate(360deg);
     }
 }

@@ -42,13 +42,13 @@
                         <i class="fa-solid fa-backward-step"></i>
                     </div>
                     <div class="btn btn-center">
-                        <!-- <i class="fas fa-play"></i> -->
-                        <i class="fas fa-pause"></i>
+                        <i class="play-icon fas fa-play"></i>
+                        <i class="pause-icon fas fa-pause"></i>
                     </div>
                     <div class="btn btn-next">
                         <i class="fa-solid fa-forward-step"></i>
                     </div>
-                    <div class="btn bth-shuffle">
+                    <div class="btn btn-shuffle">
                         <i class="fas fa-shuffle"></i>
                     </div>
                 </div>
@@ -56,12 +56,12 @@
                 <!-- Progress -->
                 <input
                     type="range"
-                    min="0"
-                    max="100"
                     placeholder="progress"
                     class="progress"
                     value="0"
                     step="1"
+                    min="0"
+                    max="100"
                 />
 
                 <!-- Audio -->
@@ -69,41 +69,8 @@
             </div>
 
             <!-- Playlist -->
-            <div class="playlist">
-                <div class="song">
-                    <div class="song-thumbnail">
-                        <img
-                            src="./assets/img/cd.jpg"
-                            alt=""
-                            class="song-img"
-                        />
-                    </div>
-                    <div class="song-info">
-                        <h3>Music name</h3>
-                        <p>Artist name</p>
-                    </div>
-                    <div class="song-option">
-                        <i class="fa-solid fa-ellipsis"></i>
-                    </div>
-                </div>
-                <div class="song">
-                    <div class="song-thumbnail">
-                        <img
-                            src="./assets/img/cd.jpg"
-                            alt=""
-                            class="song-img"
-                        />
-                    </div>
-                    <div class="song-info">
-                        <h3>Music name</h3>
-                        <p>Artist name</p>
-                    </div>
-                    <div class="song-option">
-                        <i class="fa-solid fa-ellipsis"></i>
-                    </div>
-                </div>
-            </div>
+            <div class="playlist"></div>
         </div>
-        <script src="./scripts/main.js"></script>
+        <script type="module" src="./scripts/main.js"></script>
     </body>
 </html>

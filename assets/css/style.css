@@ -134,6 +134,9 @@ body {
     justify-content: flex-start;
     box-shadow: 0px 2px 4px 0px rgba(102, 101, 101, 0.3);
 }
+.song:active {
+    opacity: 0.8;
+}
 .song-thumbnail {
     margin-right: 24px;
     --song-img-size: 54px;

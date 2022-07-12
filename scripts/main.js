@@ -23,6 +23,7 @@ const app = {
     shuffleMode: false,
     repeatMode: false,
     songs,
+    songCards: [],
 
     // -- Styles --
     setStyles: function () {
@@ -84,7 +85,7 @@ const app = {
         audio.onended = function () {
             if (!app.repeatMode) {
                 if (app.shuffleMode) app.shuffleSong()
-                else app.currentIndex += 1
+                else app.nextSong()
             }
             app.loadCurrentSong()
             audio.play()
@@ -114,7 +115,10 @@ const app = {
         nextButton.onclick = function () {
             if (app.shuffleMode) app.shuffleSong()
             else app.nextSong()
+
             app.loadCurrentSong()
+            app.renderSongs()
+            app.scrollToActiveSong()
             audio.play()
         }
 
@@ -122,7 +126,10 @@ const app = {
         prevButton.onclick = function () {
             if (app.shuffleMode) app.shuffleSong()
             else app.prevSong()
+
             app.loadCurrentSong()
+            app.renderSongs()
+            app.scrollToActiveSong()
             audio.play()
         }
 
@@ -140,9 +147,11 @@ const app = {
     },
     // -- Functions --
     renderSongs: function () {
-        const songElements = this.songs.map((song) => {
+        const songElements = this.songs.map((song, index) => {
             return `
-        <div class="song">
+        <div class="song ${
+            index === this.currentIndex ? 'song--actived' : ''
+        }" id="song-${index}">
             <div class="song-thumbnail">
                 <img
                     src="${song.image}"
@@ -151,8 +160,8 @@ const app = {
                 />
             </div>
             <div class="song-info">
-                <h3>${song.name}</h3>
-                <p>${song.singer}</p>
+                <h3 class="song-name">${song.name}</h3>
+                <p class="song-singer">${song.singer}</p>
             </div>
             <div class="song-option">
                 <i class="fa-solid fa-ellipsis"></i>
@@ -160,8 +169,15 @@ const app = {
         </div>
         `
         })
-
         playlist.innerHTML = songElements.join('')
+    },
+    scrollToActiveSong: function () {
+        setTimeout(() => {
+            $('.song--actived').scrollIntoView({
+                behavior: 'smooth',
+                block: app.currentIndex === 0 ? 'nearest' : 'center'
+            })
+        }, 300)
     },
     loadCurrentSong: function () {
         heading.textContent = this.currentSong.name
@@ -182,7 +198,16 @@ const app = {
         this.currentIndex = this.currentIndex - 1
         if (this.currentIndex < 0) this.currentIndex = this.songs.length - 1
     },
+    handleSong: function (songCard) {
+        songCard.onclick = function (e) {
+            const index = e.target.id.split('-').at(-1)
+            app.currentIndex = +index
 
+            app.loadCurrentSong()
+            app.renderSongs()
+            audio.play()
+        }
+    },
     start: function () {
         this.setStyles()
         this.defineProperties()

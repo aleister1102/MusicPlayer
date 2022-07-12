@@ -152,8 +152,19 @@ body {
     justify-content: flex-start;
     box-shadow: 0px 2px 4px 0px rgba(102, 101, 101, 0.3);
 }
+.song--actived {
+    background-color: var(--primary-color);
+}
+.song--actived .song-name,
+.song--actived .song-singer,
+.song--actived .song-option {
+    color: #fff;
+}
 .song:active {
     opacity: 0.8;
+}
+.song:hover {
+    cursor: pointer;
 }
 .song-thumbnail {
     margin-right: 24px;

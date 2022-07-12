@@ -14,12 +14,14 @@ const progress = $('.progress')
 const nextButton = $('.btn-next')
 const prevButton = $('.btn-prev')
 const shuffle = $('.btn-shuffle')
+const repeat = $('.btn-repeat')
 
 const app = {
     // -- Data --
     currentIndex: 0,
     isPlaying: false,
     shuffleMode: false,
+    repeatMode: false,
     songs,
 
     // -- Styles --
@@ -64,24 +66,26 @@ const app = {
             else audio.play()
         })
 
-        // -- When song is playing --
+        // -- When song is played --
         audio.onplay = function () {
             app.isPlaying = true
             playButton.classList.add('playing')
             cdImageAnimation.play()
         }
 
-        // -- When song is pausing --
+        // -- When song is paused --
         audio.onpause = function () {
             app.isPlaying = false
             playButton.classList.remove('playing')
             cdImageAnimation.pause()
         }
 
-        // -- When song is played --
+        // -- When song is ended --
         audio.onended = function () {
-            if (app.shuffleMode) app.shuffleSong()
-            else app.currentIndex += 1
+            if (!app.repeatMode) {
+                if (app.shuffleMode) app.shuffleSong()
+                else app.currentIndex += 1
+            }
             app.loadCurrentSong()
             audio.play()
         }
@@ -123,9 +127,15 @@ const app = {
         }
 
         // -- Shuffle button --
-        shuffle.onclick = function (e) {
-            e.target.classList.toggle('btn--actived')
+        shuffle.onclick = function () {
+            shuffle.classList.toggle('btn--actived')
             app.shuffleMode = !app.shuffleMode
+        }
+
+        // -- Repeat button --
+        repeat.onclick = function () {
+            repeat.classList.toggle('btn--actived')
+            app.repeatMode = !app.repeatMode
         }
     },
     // -- Functions --

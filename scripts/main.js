@@ -1,12 +1,12 @@
 import { songs } from '../data/songs.js'
 
 const $ = document.querySelector.bind(document)
-const $$ = document.querySelectorAll.bind(document)
+
+const PLAYER_STORAGE_KEY = 'KWAN_PLAYER'
 
 const cd = $('.cd')
 const cdImage = $('.cd-image')
 const player = $('.player')
-const playlist = $('.playlist')
 const heading = $('.header h2')
 const audio = $('audio')
 const playButton = $('.btn-center')
@@ -15,6 +15,7 @@ const nextButton = $('.btn-next')
 const prevButton = $('.btn-prev')
 const shuffle = $('.btn-shuffle')
 const repeat = $('.btn-repeat')
+const playlist = $('.playlist')
 
 const app = {
     // -- Data --
@@ -22,8 +23,8 @@ const app = {
     isPlaying: false,
     shuffleMode: false,
     repeatMode: false,
+    configs: JSON.parse(localStorage.getItem(PLAYER_STORAGE_KEY)) || {},
     songs,
-    songCards: [],
 
     // -- Styles --
     setStyles: function () {
@@ -135,23 +136,50 @@ const app = {
 
         // -- Shuffle button --
         shuffle.onclick = function () {
-            shuffle.classList.toggle('btn--actived')
+            shuffle.classList.toggle('btn--active')
             app.shuffleMode = !app.shuffleMode
+            app.setConfigs('shuffleMode', app.shuffleMode)
         }
 
         // -- Repeat button --
         repeat.onclick = function () {
-            repeat.classList.toggle('btn--actived')
+            repeat.classList.toggle('btn--active')
             app.repeatMode = !app.repeatMode
+            app.setConfigs('repeatMode', app.repeatMode)
+        }
+
+        // -- Playlist & Songs --
+        playlist.onclick = function (e) {
+            const songNode = e.target.closest('.song:not(.song--active)')
+            const optionButton = e.target.closest('.song-option')
+            const activeSong = $('.song--active')
+
+            // -- Handle song clicking --
+            if (songNode && !optionButton) {
+                songNode.classList.add('song--active')
+                activeSong.classList.remove('song--active')
+
+                app.currentIndex = songNode.dataset.index
+                app.loadCurrentSong()
+                audio.play()
+            }
+            // -- Handle option clicking --
+            if (optionButton) {
+                console.log('Option button is clicked')
+            }
         }
     },
     // -- Functions --
+    setConfigs: function (key, value) {
+        this.configs[key] = value
+        localStorage.setItem(PLAYER_STORAGE_KEY, JSON.stringify(this.configs))
+    },
     renderSongs: function () {
         const songElements = this.songs.map((song, index) => {
             return `
         <div class="song ${
-            index === this.currentIndex ? 'song--actived' : ''
-        }" id="song-${index}">
+            index === this.currentIndex ? 'song--active' : ''
+        }" data-index="${index}">
             <div class="song-thumbnail">
                 <img
                     src="${song.image}"
@@ -173,9 +201,9 @@ const app = {
     },
     scrollToActiveSong: function () {
         setTimeout(() => {
-            $('.song--actived').scrollIntoView({
+            $('.song--active').scrollIntoView({
                 behavior: 'smooth',
-                block: app.currentIndex === 0 ? 'nearest' : 'center'
+                block: 'nearest'
             })
         }, 300)
     },
@@ -183,6 +211,10 @@ const app = {
         heading.textContent = this.currentSong.name
         cdImage.style.backgroundImage = `url(${this.currentSong.image})`
         audio.src = this.currentSong.path
+    },
+    loadConfig: function () {
+        this.shuffleMode = this.configs.shuffleMode
+        this.repeatMode = this.configs.repeatMode
     },
     shuffleSong: function () {
         let newIndex
@@ -198,19 +230,17 @@ const app = {
         this.currentIndex = this.currentIndex - 1
         if (this.currentIndex < 0) this.currentIndex = this.songs.length - 1
     },
-    handleSong: function (songCard) {
-        songCard.onclick = function (e) {
-            const index = e.target.id.split('-').at(-1)
-            app.currentIndex = +index
-
-            app.loadCurrentSong()
-            app.renderSongs()
-            audio.play()
-        }
-    },
     start: function () {
+        // -- Set up styles --
         this.setStyles()
+
+        // -- Initialize configurations --
+        this.loadConfig()
+
+        // -- Property definitions --
         this.defineProperties()
+
+        // -- Event handlers --
         this.handleEvents()
 
         this.loadCurrentSong()

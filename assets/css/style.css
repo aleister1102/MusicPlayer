@@ -259,4 +259,8 @@ body {
 	.wrapper {
 		width: 360px;
 	}
+
+	.volume {
+		display: none;
+	}
 }

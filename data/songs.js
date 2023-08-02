@@ -15,7 +15,7 @@ export const songs = [
         name: 'No Internet',
         singer: '7UPPERCUTS',
         path: 'https://raw.githubusercontent.com/marucube35/music_player/master/assets/audio/No Internet.mp3',
-        image: 'https://data.chiasenhac.com/data/cover/134/133537.jpg'
+        image: 'https://i3.ytimg.com/vi/MJE8tqRFPWs/maxresdefault.jpg'
     },
     {
         name: 'Nhật Ký Âm Thanh',

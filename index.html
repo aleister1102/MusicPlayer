@@ -1,77 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" type="image/x-icon" href="./assets/img/favicon.png" />
-        <title>Music player</title>
-        <!-- Icons -->
-        <script
-            src="https://kit.fontawesome.com/f31e1a0778.js"
-            crossorigin="anonymous"
-        ></script>
-        <!-- Fonts -->
-        <link
-            href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
-            rel="stylesheet"
-        />
-        <!-- Styles -->
-        <link rel="stylesheet" href="./assets/css/style.css" />
-    </head>
 
-    <body>
-        <div class="wrapper">
-            <!-- Player -->
-            <div class="player">
-                <!-- Header -->
-                <div class="header">
-                    <h4>Now playing:</h4>
-                    <h2>Song's name</h2>
-                </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/x-icon" href="./assets/img/favicon.png" />
+  <title>Music player</title>
+  <!-- Icons -->
+  <script src="https://kit.fontawesome.com/f31e1a0778.js" crossorigin="anonymous"></script>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+  <!-- Styles -->
+  <link rel="stylesheet" href="./assets/css/style.css" />
+</head>
 
-                <!-- CD -->
-                <div class="cd">
-                    <div class="cd-image"></div>
-                </div>
+<body>
+  <div class="wrapper">
+    <!-- Player -->
+    <div class="player">
+      <!-- Header -->
+      <div class="header">
+        <h4>Now playing:</h4>
+        <h2>Song's name</h2>
+      </div>
 
-                <!-- Control -->
-                <div class="control">
-                    <div class="btn btn-repeat">
-                        <i class="fa-solid fa-arrow-rotate-right"></i>
-                    </div>
-                    <div class="btn btn-prev">
-                        <i class="fa-solid fa-backward-step"></i>
-                    </div>
-                    <div class="btn btn-center">
-                        <i class="play-icon fas fa-play"></i>
-                        <i class="pause-icon fas fa-pause"></i>
-                    </div>
-                    <div class="btn btn-next">
-                        <i class="fa-solid fa-forward-step"></i>
-                    </div>
-                    <div class="btn btn-shuffle">
-                        <i class="fas fa-shuffle"></i>
-                    </div>
-                </div>
+      <!-- CD -->
+      <div class="cd">
+        <div class="cd-image"></div>
+      </div>
 
-                <!-- Progress -->
-                <input
-                    type="range"
-                    placeholder="progress"
-                    class="progress"
-                    value="0"
-                    step="1"
-                    min="0"
-                    max="100"
-                />
-
-                <!-- Audio -->
-                <audio src="" id="audio"></audio>
-            </div>
-
-            <!-- Playlist -->
-            <div class="playlist"></div>
+      <!-- Control -->
+      <div class="control">
+        <div class="btn btn-repeat">
+          <i class="fa-solid fa-arrow-rotate-right"></i>
         </div>
-        <script type="module" src="./scripts/main.js"></script>
-    </body>
+        <div class="btn btn-prev">
+          <i class="fa-solid fa-backward-step"></i>
+        </div>
+        <div class="btn btn-center">
+          <i class="play-icon fas fa-play"></i>
+          <i class="pause-icon fas fa-pause"></i>
+        </div>
+        <div class="btn btn-next">
+          <i class="fa-solid fa-forward-step"></i>
+        </div>
+        <div class="btn btn-shuffle">
+          <i class="fas fa-shuffle"></i>
+        </div>
+      </div>
+
+      <!-- Progress Bar -->
+      <input type="range" placeholder="progress" class="progress-bar" value="0" step="1" min="0" max="100" />
+
+
+
+      <!-- Audio -->
+      <audio src="" id="audio"></audio>
+    </div>
+
+    <!-- Playlist -->
+    <div class="playlist"></div>
+
+  </div>
+
+  <!-- Volume Bar -->
+  <div class="volume">
+    <i class="fa-solid fa-volume-high"></i>
+    <i class="fa-solid fa-volume-low hidden"></i>
+    <i class="fa-solid fa-volume-xmark hidden"></i>
+    <input type="range" class="volume-bar" value="100" step="1" min="0" max="100"></input>
+  </div>
+  <script type="module" src="./scripts/main.js"></script>
+</body>
+
 </html>
